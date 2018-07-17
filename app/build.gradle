@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "developer.moein.simplemlkit"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+/*
+TODO (1)
+Go to the official MLKit website and start your project!
+https://developers.google.com/ml-kit/
+TODO (2)
+After clicking on get started, you will redirect to fireBase panel and ask you to create a new project or use existing one
+And you have to add your app to your fireBase project!
+Get the Google-services.json file and paste it in your app folder
+ */
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //default dependencies:
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //FireBase core library dependency
+    //I have to exclude support library from these libraries because my gradle will show me the
+    //error of could not resolve support-core-utils
+    implementation ('com.google.firebase:firebase-core:16.0.1'){
+        exclude group: 'com.android.support'
+    }
+    //ML kit library
+    implementation ('com.google.firebase:firebase-ml-vision:16.0.0'){
+        exclude group: 'com.android.support'
+    }
+    //Media picker library for picking pictures from camera or gallery
+    implementation 'net.alhazmy13.MediaPicker:libary:2.4.0'
+}
